@@ -9,7 +9,7 @@ import tempfile
 import pickle
 
 # ------------------ SETTINGS ------------------
-OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]  # Replace with your OpenRouter API key
+OPENROUTER_API_KEY = "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"  # Replace with your OpenRouter API key
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=OPENROUTER_API_KEY)
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
@@ -106,4 +106,5 @@ elif bot_choice == "Surendar Bot":
             st.subheader("Surendar Bot's Answer:")
             st.write(answer)
     else:
+
         st.error("FAISS index not found. Please create one in 'faiss_index' folder.")
