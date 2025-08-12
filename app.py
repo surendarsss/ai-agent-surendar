@@ -6,6 +6,8 @@ from langchain_community.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 import tempfile
 import pickle
+import os
+
 
 # Load your API key securely from Streamlit secrets
 OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
@@ -109,4 +111,5 @@ elif bot_choice == "Surendar Bot":
     else:
 
         st.error("FAISS index not found. Please create one in 'faiss_index' folder.")
+
 
