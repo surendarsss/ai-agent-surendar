@@ -57,7 +57,12 @@ def load_faiss_index(index_dir):
 st.set_page_config(page_title="📄 Surendar's AI App", page_icon="🤖", layout="wide")
 st.title("🤖 Surendar's AI Assistant")
 
-bot_choice = st.sidebar.radio("Choose Bot Mode:", ["Document Q&A Bot", "Surendar Bot"])
+# Bot selection placed directly under the title
+bot_choice = st.radio(
+    "Choose Bot Mode:",
+    ["Document Q&A Bot", "Surendar Bot"],
+    horizontal=True
+)
 
 if bot_choice == "Document Q&A Bot":
     st.markdown("**💡 Example Questions:**")
@@ -65,7 +70,11 @@ if bot_choice == "Document Q&A Bot":
     st.markdown("- List the key points from the PDF.")
     st.markdown("- What is the main conclusion in the data?")
 
-    uploaded_files = st.file_uploader("Upload PDF or CSV files", type=["pdf", "csv"], accept_multiple_files=True)
+    uploaded_files = st.file_uploader(
+        "Upload PDF or CSV files",
+        type=["pdf", "csv"],
+        accept_multiple_files=True
+    )
     if uploaded_files:
         st.success(f"{len(uploaded_files)} file(s) uploaded successfully.")
         docs = load_files(uploaded_files)
@@ -92,14 +101,15 @@ elif bot_choice == "Surendar Bot":
     st.markdown("- What work experience does Surendar have?")
     st.markdown("- What programming languages does Surendar know?")
 
-    index_dir = "faiss_index"  # Your existing FAISS index folder
+    index_dir = "faiss_index"
     if os.path.exists(index_dir):
         vector_store = load_faiss_index(index_dir)
         retriever = vector_store.as_retriever(search_kwargs={"k": 3})
-        st.success("👋 Welcome! You are now chatting with **Surendar's** personal RAG-based bot. "
-           "Feel free to ask about my background, projects, skills, or career journey.")
+        st.success(
+            "👋 Welcome! You are now chatting with **Surendar's** personal RAG-based bot. "
+            "Feel free to ask about my background, projects, skills, or career journey."
+        )
 
-        
         query = st.text_input("Ask me anything about Surendar:")
         if query:
             relevant_docs = retriever.get_relevant_documents(query)
@@ -109,7 +119,4 @@ elif bot_choice == "Surendar Bot":
             st.subheader("Surendar Bot's Answer:")
             st.write(answer)
     else:
-
         st.error("FAISS index not found. Please create one in 'faiss_index' folder.")
-
-
