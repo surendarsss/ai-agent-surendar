@@ -3,7 +3,7 @@ from openai import OpenAI
 from langchain_community.document_loaders import PyPDFLoader, CSVLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 import tempfile
 import pickle
 import os
@@ -120,4 +120,5 @@ elif bot_choice == "Surendar Bot":
             st.write(answer)
     else:
         st.error("FAISS index not found. Please create one in 'faiss_index' folder.")
+
 
