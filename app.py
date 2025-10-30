@@ -1,7 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 from langchain_community.document_loaders import PyPDFLoader, CSVLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 import tempfile
@@ -120,3 +120,4 @@ elif bot_choice == "Surendar Bot":
             st.write(answer)
     else:
         st.error("FAISS index not found. Please create one in 'faiss_index' folder.")
+
