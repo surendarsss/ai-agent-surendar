@@ -3,18 +3,23 @@ from openai import OpenAI
 from langchain_community.document_loaders import PyPDFLoader, CSVLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain.embeddings.huggingface import HuggingFaceEmbeddings
+
+# note: import from the standalone package
+from langchain_huggingface import HuggingFaceEmbeddings
+
 import tempfile
 import pickle
 import os
-
 
 # Load your API key securely from Streamlit secrets
 OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
 
 # Initialize OpenRouter client with the secret API key
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=OPENROUTER_API_KEY)
+
+# initialize embeddings (model name stays the same)
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
 
 # ------------------ FUNCTIONS ------------------
 
@@ -120,5 +125,6 @@ elif bot_choice == "Surendar Bot":
             st.write(answer)
     else:
         st.error("FAISS index not found. Please create one in 'faiss_index' folder.")
+
 
 
