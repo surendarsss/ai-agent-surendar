@@ -20,7 +20,6 @@ client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=OPENROUTER_API_
 # initialize embeddings (model name stays the same)
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-
 # ------------------ FUNCTIONS ------------------
 
 def load_files(uploaded_files):
@@ -125,6 +124,7 @@ elif bot_choice == "Surendar Bot":
             st.write(answer)
     else:
         st.error("FAISS index not found. Please create one in 'faiss_index' folder.")
+
 
 
 
